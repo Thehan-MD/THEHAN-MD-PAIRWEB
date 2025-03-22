@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CHAMINDU</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="matrix"></div>
+
+  <div class="container">
+    <h1>CHAMINDU</h1>
+    <p>Cyberpunk Tech Zone</p>
+
+    <div class="btn-container">
+      <!-- Upload song button -->
+      <input type="file" id="songFile" accept="audio/*" class="btn" onchange="uploadSong(event)">
+      <button onclick="stopMusic()" class="btn">Stop Music</button>
+    </div>
+
+    <div class="chat-ai-container">
+      <button onclick="startChatAI()" class="btn">Chat with AI</button>
+      <div id="chatAI"></div>
+    </div>
+  </div>
+
+  <audio id="uploadedSong" class="music-player" loop>
+    <source id="songSource" type="audio/mpeg">
+  </audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
