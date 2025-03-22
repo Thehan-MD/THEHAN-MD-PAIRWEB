@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CHAMINDU</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: black;
+      font-weight: bold;
+      font-family: 'Press Start 2P', cursive;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 60px;
+      margin: 0;
+    }
+
+    p {
+      font-size: 20px;
+      color: white;
+    }
+
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px 0;
+    }
+
+    .btn {
+      width: 250px;
+      padding: 20px;
+      border-radius: 6px;
+      background: rgba(0, 0, 0, 0.6);
+      color: pink;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 15px;
+      text-transform: uppercase;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .btn:hover {
+      background: pink;
+      color: yellow;
+    }
+
+    .chat-container {
+      margin-top: 20px;
+      width: 300px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.7);
+    }
+
+    .chat-box {
+      max-height: 200px;
+      overflow-y: auto;
+      margin-bottom: 10px;
+      background: #333;
+      padding: 10px;
+      border-radius: 8px;
+      color: white;
+    }
+
+    .chat-input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: none;
+      background: #444;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>CHAMINDU</h1>
+    <p>Cyberpunk Tech Zone</p>
+
+    <div class="btn-container">
+      <input type="text" id="songQuery" placeholder="Search Song" class="btn">
+      <button onclick="searchSong()" class="btn">Search Song</button>
+      <button onclick="stopMusic()" class="btn">Stop Music</button>
+      <button onclick="openChat()" class="btn">Chat with AI</button>
+    </div>
+
+    <!-- YouTube iframe to play songs -->
+    <div id="player-container">
+      <iframe id="youtube-player" width="560" height="315" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    
+    <!-- Chat AI Interface -->
+    <div id="chatContainer" class="chat-container" style="display:none;">
+      <div class="chat-box" id="chatBox"></div>
+      <input type="text" class="chat-input" id="chatInput" placeholder="Ask me something...">
+    </div>
+  </div>
+
+  <script>
+    // Function to search for a song
+    function searchSong() {
+      const query = document.getElementById("songQuery").value;
+      if (query) {
+        const youtubeUrl = `https://www.youtube.com/embed/${getYouTubeVideoId(query)}`;
+        document.getElementById("youtube-player").src = youtubeUrl;
+      }
+    }
+
+    // Dummy function for YouTube video ID (replace with API for real search)
+    function getYouTubeVideoId(query) {
+      // Here you can use YouTube API to search for real videos
+      return "dQw4w9WgXcQ"; // Sample ID
+    }
+
+    // Stop the music
+    function stopMusic() {
+      document.getElementById("youtube-player").src = "";
+    }
+
+    // Function to open the chat AI interface
+    function openChat() {
+      document.getElementById("chatContainer").style.display = 'block';
+    }
+
+    // Function to handle chat input and simulate AI response
+    document.getElementById('chatInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        const userInput = e.target.value;
+        if (userInput) {
+          addMessageToChat('You: ' + userInput);
+          e.target.value = '';
+
+          // Simulate AI response (can be replaced with an actual API call)
+          setTimeout(() => {
+            addMessageToChat('AI: ' + generateAIResponse(userInput));
+          }, 1000);
+        }
+      }
+    });
+
+    // Function to add messages to the chat box
+    function addMessageToChat(message) {
+      const chatBox = document.getElementById('chatBox');
+      chatBox.innerHTML += `<p>${message}</p>`;
+      chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the latest message
+    }
+
+    // Simulate AI response (replace with real AI integration like OpenAI)
+    function generateAIResponse(input) {
+      return "I'm still learning, but you asked: " + input;
+    }
+  </script>
+
+</body>
+</html>
